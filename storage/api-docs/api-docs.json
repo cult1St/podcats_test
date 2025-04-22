@@ -1,0 +1,390 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Podcast Platform API",
+        "description": "API documentation for the Podcast Platform built with Laravel",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/api/": {
+            "get": {
+                "tags": [
+                    "Index Page"
+                ],
+                "summary": "Get index page data",
+                "operationId": "398efee03949063f8025e3fc6c7684a3",
+                "responses": {
+                    "200": {
+                        "description": "Index page data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "featured": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PodcastsResource"
+                                            }
+                                        },
+                                        "recent": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PodcastsResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories",
+                "operationId": "3f5817a34833d0a1f4af4548dd3aeaba",
+                "responses": {
+                    "200": {
+                        "description": "List of categories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Category"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}/podcasts": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get podcasts by category",
+                "operationId": "3a9e543820b556df890a5ceef020b435",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of podcasts in the category",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PodcastsResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get category by ID",
+                "operationId": "c68e76d323c008827a9e47398b1583de",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CategoryResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/episodes": {
+            "get": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Get all episodes",
+                "operationId": "39bb119c426c59c593560bf467c00fe9",
+                "responses": {
+                    "200": {
+                        "description": "Episodes retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/EpisodeResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/episodes/{id}": {
+            "get": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Get episode by ID",
+                "operationId": "682c9f0b582614c5d25814ad0a6659c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the episode",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Episode retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/EpisodeResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Episode not found"
+                    }
+                }
+            }
+        },
+        "/api/podcasts": {
+            "get": {
+                "tags": [
+                    "Podcasts"
+                ],
+                "summary": "Get all podcasts",
+                "operationId": "f6ce71699eeefbc76dd78571f68c20e9",
+                "responses": {
+                    "200": {
+                        "description": "Podcasts retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/api/podcasts/{id}": {
+            "get": {
+                "tags": [
+                    "Podcasts"
+                ],
+                "summary": "Get podcast by ID",
+                "operationId": "29a6087596223267f63f4cbab93d6417",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the podcast",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Podcast retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/PodcastsResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/podcasts/{id}/episodes": {
+            "get": {
+                "tags": [
+                    "Podcasts"
+                ],
+                "summary": "Get episodes by podcast ID",
+                "operationId": "70c41489865d33011c9524494a593bb2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the podcast",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Episodes retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/EpisodeResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CategoryResource": {
+                "title": "Category Resource",
+                "description": "Category model",
+                "xml": {
+                    "name": "CategoryResource"
+                }
+            },
+            "EpisodeResource": {
+                "title": "Episode Resource",
+                "description": "Episode Resource model",
+                "xml": {
+                    "name": "EpisodeResource"
+                }
+            },
+            "PodcastsResource": {
+                "title": "POdcatst Resource",
+                "description": "POdcasts Resource model",
+                "xml": {
+                    "name": "PodcastsResource"
+                }
+            },
+            "Category": {
+                "title": "Category",
+                "description": "Category model",
+                "xml": {
+                    "name": "Category"
+                }
+            },
+            "Episode": {
+                "title": "Episode",
+                "description": "Episode model",
+                "xml": {
+                    "name": "Episode"
+                }
+            },
+            "Podcasts": {
+                "title": "Podcasts",
+                "description": "Podcasts model",
+                "xml": {
+                    "name": "Podcasts"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Index Page",
+            "description": "Index Page"
+        },
+        {
+            "name": "Categories",
+            "description": "Categories"
+        },
+        {
+            "name": "Episodes",
+            "description": "Episodes"
+        },
+        {
+            "name": "Podcasts",
+            "description": "Podcasts"
+        }
+    ]
+}
