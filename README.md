@@ -23,7 +23,7 @@ Follow these steps to get the project running locally:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/podcast-platform-api.git
+git clone https://github.com/cult1St/podcast-test.git
 cd podcast-platform-api
 ```
 
